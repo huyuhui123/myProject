@@ -1,0 +1,71 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>index</title>
+    <script src="/jquery-3.6.0.min.js"></script>
+    <style>
+        #luns{
+            border: 1px solid red;
+        }
+        .lun {
+            display: flex;
+        }
+        #submit{
+            margin-top: 50px;
+        }
+        #name{
+            width: 100px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div id="luns">
+    <div class="lun" th:each="lun : ${lunsList}">
+        <div id="name" th:text="${lun.name}">jjj</div>：
+        <div id="content" th:text="${lun.content}">你好，我是机器人</div>
+    </div>
+</div>
+<div id="submit">
+    <form action="/"   method="post">
+        <label for="a">请输入您想使用的名字：</label>
+        <input type="text" name="name" id="a"><p/>
+        <label for="b">请输入您的评论：</label>
+        <input type="text" name="content" id="b"><p></p>
+        <input type="button" onclick="aa()"  value="提交">
+    </form>
+</div>
+<script>
+    function aa(){
+        var a=$("#a").val()
+        var b=$("#b").val()
+        console.log(a+b)
+            $.ajax({
+  url: "http://127.0.0.1:8080/addlun",
+  type:'post',
+  data:{
+      name:a,
+      content:b
+  },
+  dataType:'json',
+  success: function( result ) {
+      console.log("----------------");
+      console.log(result);
+      if (result==false) {
+          alert(result)
+          return false;
+      }
+      else {
+          //可以创建，进行跳转
+          alert(result)
+          window.location.href = "/";
+          return true;
+      }
+  }
+});
+    }
+
+</script>
+</body>
+
+</html>
