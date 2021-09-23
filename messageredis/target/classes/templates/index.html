@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>index</title>
+    <script src="/jquery-3.6.0.min.js"></script>
+    <style>
+        input{
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<input type="text" name="" id="tele"  >
+<input type="button" value="发送验证码" onclick="aa()">
+<input type="text" name="" id="">
+<input type="button" value="进行验证">
+
+<script>
+
+    function aa(){
+        $.ajax({
+            url: "http://127.0.0.1:8080/sendsms",
+            type:'post',
+            dataType:'json',
+            data:{
+                tele:$("#tele").val()
+            },
+            success: function( result ) {
+                console.log(result);
+            }
+        });
+        return true;
+    }
+
+</script>
+</body>
+</html>
